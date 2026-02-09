@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6b26b"/>
+      <stop offset="100%" stop-color="#7aa2ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#f7f4ee"/>
+  <rect x="60" y="60" width="1080" height="510" rx="48" fill="url(#g)" opacity="0.9"/>
+  <text x="140" y="260" font-size="68" font-family="'Space Grotesk', Arial, sans-serif" fill="#1b1b1f">ZHI主页</text>
+  <text x="140" y="330" font-size="32" font-family="'Newsreader', serif" fill="#1b1b1f">个人主页 + AI 工具导航</text>
+  <text x="140" y="400" font-size="24" font-family="'Space Grotesk', Arial, sans-serif" fill="#1b1b1f">纯前端 · JSON 驱动 · 随时可分享</text>
+</svg>

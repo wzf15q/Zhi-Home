@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+const { title, description } = Astro.props;
+const umamiId = import.meta.env.PUBLIC_UMAMI_ID;
+const umamiSrc = import.meta.env.PUBLIC_UMAMI_SRC || "https://analytics.umami.is/script.js";
+---
+<!doctype html>
+<html lang="zh-CN" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f7f4ee" />
+    <link rel="icon" href="/avatar.svg" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var preferred = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+          var theme = stored || "system";
+          var finalTheme = theme === "system" ? preferred : theme;
+          document.documentElement.dataset.theme = finalTheme;
+        } catch (e) {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+    {umamiId ? (
+      <script async src={umamiSrc} data-website-id={umamiId}></script>
+    ) : null}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

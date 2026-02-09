@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "ZHI主页 - 个人主页与AI工具导航";
+const description = "随时向他人介绍自己的一页式主页，包含AI工具导航与学习日志。";
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">ZHI主页</div>
+      <div class="actions" style="position: relative;">
+        <button id="share-btn" type="button">分享链接</button>
+        <button id="qr-btn" type="button">二维码</button>
+        <button id="theme-btn" type="button">主题</button>
+        <div id="theme-menu" class="theme-menu">
+          <button class="theme-option" data-theme="system" type="button">
+            <span class="theme-swatch system"></span>
+            跟随系统
+          </button>
+          <button class="theme-option" data-theme="light" type="button">
+            <span class="theme-swatch"></span>
+            浅色主题
+          </button>
+          <button class="theme-option" data-theme="dark" type="button">
+            <span class="theme-swatch dark"></span>
+            深色主题
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero reveal">
+      <h1>把我介绍给你，也把工具整理给我自己。</h1>
+      <p>
+        这是一个纯前端的个人主页：上半部分是我的 AI 工具导航，下面是学习日志和个人介绍。
+        你可以直接浏览、搜索、分享。
+      </p>
+      <div class="category-row">
+        <span class="pill">纯前端</span>
+        <span class="pill">JSON 驱动</span>
+        <span class="pill">随时可分享</span>
+      </div>
+    </section>
+
+    <section class="section reveal" id="tools-section">
+      <div class="section-head">
+        <div>
+          <h2>工具导航</h2>
+          <p>我的常用工具清单，点击即可打开使用。</p>
+        </div>
+        <div id="tools-count" class="section-meta"></div>
+      </div>
+      <div id="tools-featured" class="category-row"></div>
+      <div id="tools-categories" class="category-row"></div>
+      <div class="tools-search">
+        <input id="tools-search" type="text" placeholder="输入关键词搜索工具" />
+        <select id="tools-filter">
+          <option value="">全部分类</option>
+        </select>
+        <button id="tools-clear" type="button">清除</button>
+      </div>
+      <div id="tools-grid" class="tools-grid"></div>
+      <div id="tools-empty" class="notice" style="display: none;"></div>
+    </section>
+
+    <section class="section reveal" id="logs-section">
+      <div class="section-head">
+        <div>
+          <h2>学习日志</h2>
+          <p>记录我如何把想法变成可用产品。</p>
+        </div>
+        <div class="actions">
+          <button id="logs-expand-all" type="button">展开全部</button>
+        </div>
+      </div>
+      <div id="logs-list"></div>
+      <div id="logs-empty" class="notice" style="display: none;"></div>
+    </section>
+
+    <section class="section reveal" id="profile-section">
+      <div style="display: flex; justify-content: space-between; gap: 16px; align-items: center;">
+        <h2 style="margin: 0;">个人介绍</h2>
+        <div class="actions">
+          <button id="card-download" type="button">下载名片</button>
+        </div>
+      </div>
+      <div id="profile-card" class="profile"></div>
+      <div id="profile-empty" class="notice" style="display: none;"></div>
+    </section>
+
+    <div class="footer">© 2026 Zhi. Built with Astro.</div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="qr-modal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div style="font-weight: 600;">扫码访问 ZHI主页</div>
+      <canvas id="qr-canvas" width="220" height="220"></canvas>
+      <div class="section-meta">二维码本地生成，无需外部请求。</div>
+      <div class="actions">
+        <button id="qr-download" type="button">下载二维码</button>
+        <button id="qr-close" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/scripts/app.js"></script>
+</BaseLayout>

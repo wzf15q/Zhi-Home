@@ -1,0 +1,65 @@
+{
+  "categories": ["写作", "效率", "学习"],
+  "items": [
+    {
+      "name": "ChatGPT",
+      "description": "通用对话与创作助手，快速生成与改写内容。",
+      "url": "https://chat.openai.com",
+      "tags": ["对话", "创作"],
+      "category": "写作",
+      "weight": 90,
+      "featured": true,
+      "icon": "https://cdn.simpleicons.org/openai"
+    },
+    {
+      "name": "Claude",
+      "description": "擅长长文与分析的 AI 助手。",
+      "url": "https://claude.ai",
+      "tags": ["分析", "长文"],
+      "category": "写作",
+      "weight": 85,
+      "featured": true,
+      "icon": "https://cdn.simpleicons.org/anthropic"
+    },
+    {
+      "name": "Perplexity",
+      "description": "快速检索与总结答案的搜索式 AI。",
+      "url": "https://www.perplexity.ai",
+      "tags": ["搜索", "总结"],
+      "category": "学习",
+      "weight": 80,
+      "featured": false,
+      "icon": "https://cdn.simpleicons.org/perplexity"
+    },
+    {
+      "name": "Notion AI",
+      "description": "在笔记中直接生成、整理与改写内容。",
+      "url": "https://www.notion.so/product/ai",
+      "tags": ["笔记", "效率"],
+      "category": "效率",
+      "weight": 70,
+      "featured": false,
+      "icon": "https://cdn.simpleicons.org/notion"
+    },
+    {
+      "name": "Kimi",
+      "description": "擅长长文本阅读与总结。",
+      "url": "https://kimi.moonshot.cn",
+      "tags": ["阅读", "总结"],
+      "category": "学习",
+      "weight": 75,
+      "featured": false,
+      "icon": "https://cdn.simpleicons.org/moonpay"
+    },
+    {
+      "name": "Gamma",
+      "description": "快速生成演示与文档。",
+      "url": "https://gamma.app",
+      "tags": ["演示", "生成"],
+      "category": "效率",
+      "weight": 65,
+      "featured": false,
+      "icon": "https://cdn.simpleicons.org/gamma"
+    }
+  ]
+}
