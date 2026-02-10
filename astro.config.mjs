@@ -1,10 +1,8 @@
 import { defineConfig } from "astro/config";
 
-const site = process.env.SITE_URL || "https://example.com";
-const base = process.env.BASE_PATH || "/";
-
+// GitHub Pages configuration
 export default defineConfig({
-  site,
-  base,
+  site: "https://wzf15q.github.io",
+  base: "/Zhi-Home/",
   output: "static"
 });
