@@ -10,11 +10,12 @@
   --accent: #d05f2e;
   --accent-2: #2e5bd0;
   --hl: rgba(240, 140, 78, 0.28);
-  --shadow: 0 12px 32px rgba(27, 27, 31, 0.08);
-  --radius: 18px;
+  --shadow: 0 8px 24px rgba(27, 27, 31, 0.06); /* 更柔和的阴影 */
+  --radius: 12px; /* 更小的圆角，更紧凑 */
   --grad-1: #ffd7a8;
   --grad-2: #cde7ff;
   --grad-3: #ffe8c7;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 丝滑的缓动曲线 */
 }
 
 :root[data-theme="dark"] {
@@ -27,7 +28,7 @@
   --accent: #f08c4e;
   --accent-2: #7aa2ff;
   --hl: rgba(240, 140, 78, 0.35);
-  --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   --grad-1: #3b2a1c;
   --grad-2: #1c2b3a;
   --grad-3: #2a1e2e;
@@ -35,16 +36,18 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   font-family: "Space Grotesk", system-ui, sans-serif;
   color: var(--ink);
-  background: radial-gradient(1200px 800px at 20% -10%, var(--grad-1) 0%, transparent 60%),
-    radial-gradient(1000px 600px at 90% 0%, var(--grad-2) 0%, transparent 55%),
+  background: radial-gradient(1000px 600px at 20% -10%, var(--grad-1) 0%, transparent 60%),
+    radial-gradient(800px 500px at 90% 0%, var(--grad-2) 0%, transparent 55%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
   min-height: 100vh;
+  line-height: 1.5; /* 更紧凑的行高 */
 }
 
 a {
@@ -53,19 +56,19 @@ a {
 }
 
 .container {
-  width: min(1100px, 92vw);
+  width: min(1100px, 94vw); /* 更紧凑的容器宽度 */
   margin: 0 auto;
-  padding: 32px 0 80px;
+  padding: 20px 0 60px; /* 减少上下内边距 */
 }
 
 .hero {
-  padding: 48px 0 28px;
+  padding: 32px 0 20px; /* 紧凑的英雄区间距 */
   display: grid;
-  gap: 16px;
+  gap: 12px; /* 更小的间距 */
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 3vw, 3.4rem);
+  font-size: clamp(1.8rem, 3vw, 2.8rem); /* 更小的标题字号 */
   line-height: 1.1;
   margin: 0;
   letter-spacing: -0.02em;
@@ -73,7 +76,7 @@ a {
 
 .hero p {
   font-family: "Newsreader", serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* 更小的描述字号 */
   color: var(--muted);
   max-width: 60ch;
 }
@@ -82,18 +85,19 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 18px 0;
+  gap: 12px;
+  padding: 12px 0; /* 紧凑的顶部栏间距 */
 }
 
 .brand {
   font-weight: 700;
   letter-spacing: 0.02em;
+  font-size: 1rem; /* 更小的品牌字号 */
 }
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 8px; /* 更小的按钮间距 */
   flex-wrap: wrap;
 }
 
@@ -102,33 +106,35 @@ button,
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--ink);
-  padding: 10px 14px;
+  padding: 8px 12px; /* 更小的按钮内边距 */
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.9rem; /* 更小的按钮文字 */
+  transition: var(--transition); /* 统一的动画 */
 }
 
 button:hover,
 .action-btn:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow);
+  border-color: var(--accent); /* hover 时边框变色，更醒目 */
 }
 
 .pill {
   display: inline-flex;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
-  padding: 6px 12px;
+  padding: 4px 10px; /* 紧凑的pill样式 */
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--card);
-  font-size: 0.85rem;
+  font-size: 0.8rem; /* 更小的文字 */
 }
 
 .section {
-  margin: 32px 0;
-  padding: 24px;
+  margin: 24px 0; /* 更小的区块间距 */
+  padding: 18px; /* 紧凑的区块内边距 */
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -137,57 +143,71 @@ button:hover,
 }
 
 .section h2 {
-  margin: 0 0 16px;
-  font-size: 1.4rem;
+  margin: 0 0 12px; /* 更小的标题间距 */
+  font-size: 1.25rem; /* 更小的区块标题 */
 }
 
 .section-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px; /* 紧凑的头部间距 */
 }
 
 .section-head p {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* 更小的元信息 */
 }
 
 .section-meta {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.8rem; /* 更小的元信息 */
 }
 
 .category-row {
   display: flex;
-  gap: 8px;
+  gap: 6px; /* 更小的分类间距 */
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .tools-search {
   display: flex;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 8px; /* 更小的搜索栏间距 */
+  margin-bottom: 14px; /* 紧凑的底部间距 */
 }
 
 .tools-search input {
   flex: 1;
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: 10px 12px; /* 紧凑的输入框内边距 */
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--ink);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.tools-search input:focus {
+  outline: none;
+  border-color: var(--accent); /* 聚焦时边框变色 */
 }
 
 .tools-search select {
-  padding: 12px 12px;
-  border-radius: 12px;
+  padding: 10px 10px; /* 紧凑的选择框内边距 */
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--ink);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.tools-search select:focus {
+  outline: none;
+  border-color: var(--accent);
 }
 
 .hl {
@@ -199,45 +219,59 @@ button:hover,
 
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 更窄的卡片 */
+  gap: 12px; /* 更小的卡片间距 */
 }
 
 .tool-card {
   border: 1px solid var(--border);
   background: var(--card);
-  border-radius: 14px;
-  padding: 14px;
+  border-radius: var(--radius);
+  padding: 12px; /* 紧凑的卡片内边距 */
   display: grid;
-  gap: 8px;
-  min-height: 170px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 6px; /* 更小的卡片内部间距 */
+  min-height: 140px; /* 更矮的卡片 */
+  transition: var(--transition);
 }
 
 .tool-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02); /* 更细腻的hover动画 */
   box-shadow: var(--shadow);
+  border-color: var(--accent);
 }
 
 .tool-card .icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: #f4f4f4;
+  width: 30px; /* 更小的图标 */
+  height: 30px;
+  border-radius: 6px; /* 更小的圆角 */
+  background: var(--bg-2);
   display: grid;
   place-items: center;
   overflow: hidden;
+  font-size: 1rem;
+}
+
+.tool-card h3 {
+  font-size: 1rem; /* 更小的卡片标题 */
+  font-weight: 600;
+}
+
+.tool-card p {
+  font-size: 0.85rem; /* 更小的卡片描述 */
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 .tool-card .tags {
   display: flex;
-  gap: 6px;
+  gap: 4px; /* 更小的标签间距 */
   flex-wrap: wrap;
+  margin-top: 4px;
 }
 
 .tag {
-  font-size: 0.72rem;
-  padding: 4px 8px;
+  font-size: 0.7rem; /* 更小的标签文字 */
+  padding: 2px 6px; /* 紧凑的标签内边距 */
   background: var(--bg-2);
   border-radius: 999px;
 }
@@ -246,8 +280,8 @@ button:hover,
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.72rem;
-  padding: 4px 8px;
+  font-size: 0.7rem;
+  padding: 2px 6px;
   background: var(--bg-2);
   border-radius: 999px;
   color: var(--muted);
@@ -255,9 +289,9 @@ button:hover,
 
 .log-card {
   border: 1px dashed var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
+  border-radius: var(--radius);
+  padding: 12px; /* 紧凑的日志卡片 */
+  margin-bottom: 10px;
   background: var(--card);
 }
 
@@ -265,7 +299,7 @@ button:hover,
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.35s ease, opacity 0.35s ease;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .log-detail.is-open {
@@ -276,54 +310,56 @@ button:hover,
 .log-meta {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .profile {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 18px;
+  grid-template-columns: 100px 1fr; /* 更小的头像 */
+  gap: 14px;
   align-items: center;
 }
 
 .profile img {
-  width: 120px;
-  height: 120px;
-  border-radius: 22px;
+  width: 100px;
+  height: 100px;
+  border-radius: 16px; /* 更小的头像圆角 */
   object-fit: cover;
   border: 2px solid var(--border);
 }
 
 .notice {
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: 10px 12px; /* 紧凑的公告 */
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: #fff7e8;
   color: #8a4b10;
-  margin-top: 10px;
+  margin-top: 8px; /* 更小的间距 */
+  font-size: 0.9rem;
 }
 
 .toast {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  padding: 12px 16px;
-  border-radius: 12px;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 14px; /* 紧凑的提示框 */
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: var(--shadow);
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateY(8px) scale(0.95); /* 缩放+位移的入场动画 */
+  transition: var(--transition);
   z-index: 20;
   pointer-events: none;
+  font-size: 0.9rem;
 }
 
 .toast.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1); /* 更丝滑的显示动画 */
 }
 
 .modal {
@@ -333,62 +369,84 @@ button:hover,
   place-items: center;
   background: rgba(0, 0, 0, 0.45);
   z-index: 30;
-  padding: 20px;
+  padding: 16px; /* 紧凑的内边距 */
+  backdrop-filter: blur(4px); /* 模糊背景，更高级 */
 }
 
 .modal.is-open {
   display: grid;
+  animation: fadeIn 0.3s ease; /* 模态框淡入动画 */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-card {
   background: var(--card);
-  border-radius: 18px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
-  padding: 18px;
-  width: min(360px, 92vw);
+  padding: 16px; /* 紧凑的卡片内边距 */
+  width: min(340px, 92vw); /* 更小的模态框 */
   box-shadow: var(--shadow);
   display: grid;
-  gap: 12px;
+  gap: 10px; /* 更小的内部间距 */
+  transform: scale(0.95);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.modal.is-open .modal-card {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .modal-card canvas {
-  width: 220px;
-  height: 220px;
+  width: 200px; /* 更小的画布 */
+  height: 200px;
   margin: 0 auto;
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
 }
 
 .theme-menu {
   position: absolute;
   right: 0;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px); /* 更小的间距 */
   display: none;
-  padding: 10px;
-  border-radius: 12px;
+  padding: 8px; /* 紧凑的内边距 */
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: var(--shadow);
-  min-width: 160px;
+  min-width: 150px; /* 更小的菜单宽度 */
 }
 
 .theme-menu.is-open {
   display: grid;
-  gap: 6px;
+  gap: 4px; /* 更小的选项间距 */
+  animation: slideDown 0.2s ease; /* 菜单下滑动画 */
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .theme-option {
-  border-radius: 10px;
-  padding: 8px 10px;
-  font-size: 0.9rem;
+  border-radius: 8px; /* 更小的圆角 */
+  padding: 6px 8px; /* 紧凑的内边距 */
+  font-size: 0.85rem; /* 更小的文字 */
   border: 1px solid transparent;
   background: transparent;
   text-align: left;
   display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 10px;
+  grid-template-columns: 24px 1fr; /* 更小的色块 */
+  gap: 8px; /* 更小的间距 */
   align-items: center;
+  transition: var(--transition);
 }
 
 .theme-option.is-active {
@@ -396,10 +454,14 @@ button:hover,
   background: var(--bg-2);
 }
 
+.theme-option:hover {
+  background: var(--bg-2); /* hover 背景变化 */
+}
+
 .theme-swatch {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 24px; /* 更小的色块 */
+  height: 24px;
+  border-radius: 6px; /* 更小的圆角 */
   border: 1px solid var(--border);
   background: linear-gradient(135deg, #f7f4ee, #f2ebe0);
 }
@@ -414,8 +476,8 @@ button:hover,
 
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(12px); /* 更小的位移 */
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .reveal.is-visible {
@@ -424,9 +486,11 @@ button:hover,
 }
 
 .footer {
-  margin-top: 40px;
+  margin-top: 32px; /* 更小的间距 */
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* 更小的文字 */
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
 @media (max-width: 720px) {
@@ -436,12 +500,18 @@ button:hover,
   .topbar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
   }
   .tools-search {
     flex-direction: column;
+    gap: 6px;
   }
   .toast {
-    right: 12px;
-    left: 12px;
+    right: 8px;
+    left: 8px;
+    font-size: 0.85rem;
+  }
+  .tools-grid {
+    grid-template-columns: 1fr; /* 移动端单列，更紧凑 */
   }
 }

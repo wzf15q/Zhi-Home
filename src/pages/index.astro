@@ -1,109 +1,215 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-
-const title = "ZHI主页 - 个人主页与AI工具导航";
-const description = "随时向他人介绍自己的一页式主页，包含AI工具导航与学习日志。";
+// src/pages/index.astro
+const tools = [
+  {
+    name: "Markdown 编辑器",
+    desc: "轻量高效的在线 Markdown 编辑工具",
+    tags: ["写作", "Markdown", "在线"],
+    icon: "✏️"
+  },
+  {
+    name: "图片压缩",
+    desc: "无损压缩图片体积，保留画质",
+    tags: ["图片", "压缩", "工具"],
+    icon: "🖼️"
+  },
+  {
+    name: "JSON 格式化",
+    desc: "一键格式化 JSON 代码，支持高亮",
+    tags: ["开发", "JSON", "工具"],
+    icon: "🔧"
+  },
+  {
+    name: "时间戳转换",
+    desc: "Unix 时间戳与普通时间互转",
+    tags: ["开发", "时间", "小工具"],
+    icon: "⏰"
+  }
+];
 ---
 
-<BaseLayout title={title} description={description}>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智汇工具 - 实用在线工具集合</title>
+  <link rel="stylesheet" href="/global.css" />
+</head>
+<body>
   <div class="container">
-    <div class="topbar">
-      <div class="brand">ZHI主页</div>
-      <div class="actions" style="position: relative;">
-        <button id="share-btn" type="button">分享链接</button>
-        <button id="qr-btn" type="button">二维码</button>
-        <button id="theme-btn" type="button">主题</button>
-        <div id="theme-menu" class="theme-menu">
-          <button class="theme-option" data-theme="system" type="button">
-            <span class="theme-swatch system"></span>
-            跟随系统
-          </button>
-          <button class="theme-option" data-theme="light" type="button">
-            <span class="theme-swatch"></span>
-            浅色主题
-          </button>
-          <button class="theme-option" data-theme="dark" type="button">
-            <span class="theme-swatch dark"></span>
-            深色主题
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <section class="hero reveal">
-      <h1>把我介绍给你，也把工具整理给我自己。</h1>
-      <p>
-        这是一个纯前端的个人主页：上半部分是我的 AI 工具导航，下面是学习日志和个人介绍。
-        你可以直接浏览、搜索、分享。
-      </p>
-      <div class="category-row">
-        <span class="pill">纯前端</span>
-        <span class="pill">JSON 驱动</span>
-        <span class="pill">随时可分享</span>
-      </div>
-    </section>
-
-    <section class="section reveal" id="tools-section">
-      <div class="section-head">
-        <div>
-          <h2>工具导航</h2>
-          <p>我的常用工具清单，点击即可打开使用。</p>
-        </div>
-        <div id="tools-count" class="section-meta"></div>
-      </div>
-      <div id="tools-featured" class="category-row"></div>
-      <div id="tools-categories" class="category-row"></div>
-      <div class="tools-search">
-        <input id="tools-search" type="text" placeholder="输入关键词搜索工具" />
-        <select id="tools-filter">
-          <option value="">全部分类</option>
-        </select>
-        <button id="tools-clear" type="button">清除</button>
-      </div>
-      <div id="tools-grid" class="tools-grid"></div>
-      <div id="tools-empty" class="notice" style="display: none;"></div>
-    </section>
-
-    <section class="section reveal" id="logs-section">
-      <div class="section-head">
-        <div>
-          <h2>学习日志</h2>
-          <p>记录我如何把想法变成可用产品。</p>
-        </div>
-        <div class="actions">
-          <button id="logs-expand-all" type="button">展开全部</button>
-        </div>
-      </div>
-      <div id="logs-list"></div>
-      <div id="logs-empty" class="notice" style="display: none;"></div>
-    </section>
-
-    <section class="section reveal" id="profile-section">
-      <div style="display: flex; justify-content: space-between; gap: 16px; align-items: center;">
-        <h2 style="margin: 0;">个人介绍</h2>
-        <div class="actions">
-          <button id="card-download" type="button">下载名片</button>
-        </div>
-      </div>
-      <div id="profile-card" class="profile"></div>
-      <div id="profile-empty" class="notice" style="display: none;"></div>
-    </section>
-
-    <div class="footer">© 2026 Zhi. Built with Astro.</div>
-  </div>
-
-  <div id="toast" class="toast"></div>
-  <div id="qr-modal" class="modal" aria-hidden="true">
-    <div class="modal-card">
-      <div style="font-weight: 600;">扫码访问 ZHI主页</div>
-      <canvas id="qr-canvas" width="220" height="220"></canvas>
-      <div class="section-meta">二维码本地生成，无需外部请求。</div>
+    <!-- 顶部导航 -->
+    <header class="topbar">
+      <div class="brand">智汇工具 🛠️</div>
       <div class="actions">
-        <button id="qr-download" type="button">下载二维码</button>
-        <button id="qr-close" type="button">关闭</button>
+        <button id="themeBtn" class="action-btn">
+          <span class="pill">
+            <span>🌓</span>
+            <span>主题</span>
+          </span>
+        </button>
+        <button class="action-btn">关于</button>
       </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="hero reveal">
+      <h1>实用在线工具集合</h1>
+      <p>精选各类高效工具，无需安装，打开即用，提升你的工作效率</p>
+    </section>
+
+    <!-- 工具搜索区 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <h2>工具库</h2>
+        <p class="section-meta">共 {tools.length} 个工具</p>
+      </div>
+      
+      <div class="tools-search">
+        <input type="text" placeholder="搜索工具..." id="searchInput" />
+        <select id="categorySelect">
+          <option value="all">全部分类</option>
+          <option value="writing">写作工具</option>
+          <option value="dev">开发工具</option>
+          <option value="image">图片工具</option>
+        </select>
+      </div>
+
+      <!-- 工具卡片网格 -->
+      <div class="tools-grid" id="toolsGrid">
+        {tools.map((tool, index) => (
+          <div class="tool-card reveal" key={tool.name} style={{ transitionDelay: `${index * 50}ms` }}>
+            <div class="icon">{tool.icon}</div>
+            <h3>{tool.name}</h3>
+            <p>{tool.desc}</p>
+            <div class="tags">
+              {tool.tags.map(tag => (
+                <span class="tag" key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 公告区 -->
+    <div class="notice reveal">
+      📢 本站所有工具均为免费使用，数据仅保存在本地，无需担心隐私泄露
     </div>
+
+    <!-- 页脚 -->
+    <footer class="footer reveal">
+      <p>© 2026 智汇工具 | 简洁 · 高效 · 免费</p>
+    </footer>
   </div>
 
-  <script type="module" src="/scripts/app.js"></script>
-</BaseLayout>
+  <!-- 优化后的交互脚本 -->
+  <script>
+    // 主题切换功能（优化动画）
+    const themeBtn = document.getElementById('themeBtn');
+    let isDark = localStorage.getItem('theme') === 'dark';
+    
+    // 初始化主题
+    if (isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    
+    // 平滑切换主题
+    themeBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      }
+      
+      // 添加主题切换的过渡动画
+      document.body.classList.add('theme-transition');
+      setTimeout(() => {
+        document.body.classList.remove('theme-transition');
+      }, 300);
+    });
+
+    // 滚动动画（优化触发时机和性能）
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.1, // 更早触发动画
+      rootMargin: '0px 0px -50px 0px' // 调整触发区域
+    });
+    
+    revealElements.forEach(el => {
+      observer.observe(el);
+    });
+
+    // 搜索功能（添加输入防抖和动画）
+    const searchInput = document.getElementById('searchInput');
+    const categorySelect = document.getElementById('categorySelect');
+    const toolsGrid = document.getElementById('toolsGrid');
+    let searchTimeout;
+    
+    // 防抖函数
+    function debounce(func, delay) {
+      return function(...args) {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+    
+    // 搜索过滤（带动画）
+    const filterTools = debounce(() => {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      const category = categorySelect.value;
+      
+      // 先隐藏所有卡片
+      document.querySelectorAll('.tool-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px) scale(0.98)';
+      });
+      
+      // 延迟后显示匹配的卡片
+      setTimeout(() => {
+        document.querySelectorAll('.tool-card').forEach((card, index) => {
+          const name = card.querySelector('h3').textContent.toLowerCase();
+          const desc = card.querySelector('p').textContent.toLowerCase();
+          const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.toLowerCase());
+          
+          const matchesSearch = searchTerm === '' || name.includes(searchTerm) || desc.includes(searchTerm) || tags.some(t => t.includes(searchTerm));
+          const matchesCategory = category === 'all' || tags.some(t => {
+            if (category === 'writing') return t === '写作';
+            if (category === 'dev') return t === '开发';
+            if (category === 'image') return t === '图片';
+            return false;
+          });
+          
+          if (matchesSearch && matchesCategory) {
+            card.style.display = 'grid';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0) scale(1)';
+              card.style.transitionDelay = `${index * 30}ms`;
+            }, 50);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }, 200);
+    }, 300);
+    
+    searchInput.addEventListener('input', filterTools);
+    categorySelect.addEventListener('change', filterTools);
+
+    // 页面加载动画
+    window.addEventListener('load', () => {
+      document.body.classList.add('page-loaded');
+    });
+  </script>
+</body>
+</html>
