@@ -1,0 +1,14 @@
+{
+  "name": "Zhi",
+  "avatar": "/avatar.svg",
+  "bio": "专注于把复杂的技术变成清晰的产品体验。正在独立完成 ZHI主页，用它来记录与分享我的 AI 工具与学习路径。",
+  "contacts": [
+    {"type": "email", "value": "hello@yourmail.com"},
+    {"type": "wechat", "value": "zhi-ai"}
+  ],
+  "socials": [
+    {"label": "GitHub", "url": "https://github.com/yourname"},
+    {"label": "X", "url": "https://x.com/yourname"},
+    {"label": "Blog", "url": "https://yourdomain.com"}
+  ]
+}

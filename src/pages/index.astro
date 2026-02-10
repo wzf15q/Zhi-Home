@@ -1,215 +1,320 @@
 ---
-// src/pages/index.astro
-const tools = [
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// AI Tools Data
+const aiTools = [
   {
-    name: "Markdown 编辑器",
-    desc: "轻量高效的在线 Markdown 编辑工具",
-    tags: ["写作", "Markdown", "在线"],
-    icon: "✏️"
+    name: "ChatGPT",
+    description: "OpenAI 开发的强大对话式 AI 助手，支持多种任务",
+    url: "https://chat.openai.com",
+    category: "chat",
+    tags: ["对话", "写作", "编程"],
+    icon: "💬",
+    featured: true
   },
   {
-    name: "图片压缩",
-    desc: "无损压缩图片体积，保留画质",
-    tags: ["图片", "压缩", "工具"],
+    name: "Claude",
+    description: "Anthropic 的 AI 助手，擅长长文本理解和分析",
+    url: "https://claude.ai",
+    category: "chat",
+    tags: ["对话", "分析", "写作"],
+    icon: "🤖",
+    featured: true
+  },
+  {
+    name: "Midjourney",
+    description: "顶级 AI 图像生成工具，创造惊艳的艺术作品",
+    url: "https://www.midjourney.com",
+    category: "image",
+    tags: ["图像", "艺术", "设计"],
+    icon: "🎨",
+    featured: true
+  },
+  {
+    name: "DALL·E 3",
+    description: "OpenAI 的图像生成模型，精准理解文字描述",
+    url: "https://openai.com/dall-e-3",
+    category: "image",
+    tags: ["图像", "创意", "设计"],
     icon: "🖼️"
   },
   {
-    name: "JSON 格式化",
-    desc: "一键格式化 JSON 代码，支持高亮",
-    tags: ["开发", "JSON", "工具"],
-    icon: "🔧"
+    name: "GitHub Copilot",
+    description: "AI 编程助手，实时代码建议和自动补全",
+    url: "https://github.com/features/copilot",
+    category: "coding",
+    tags: ["编程", "开发", "效率"],
+    icon: "💻",
+    featured: true
   },
   {
-    name: "时间戳转换",
-    desc: "Unix 时间戳与普通时间互转",
-    tags: ["开发", "时间", "小工具"],
-    icon: "⏰"
+    name: "Cursor",
+    description: "AI 驱动的代码编辑器，智能编程体验",
+    url: "https://cursor.sh",
+    category: "coding",
+    tags: ["编程", "IDE", "AI"],
+    icon: "⚡"
+  },
+  {
+    name: "Notion AI",
+    description: "集成在 Notion 中的 AI 写作和整理助手",
+    url: "https://www.notion.so/product/ai",
+    category: "writing",
+    tags: ["写作", "笔记", "整理"],
+    icon: "✍️"
+  },
+  {
+    name: "Grammarly",
+    description: "AI 写作助手，语法检查和文风优化",
+    url: "https://www.grammarly.com",
+    category: "writing",
+    tags: ["写作", "语法", "优化"],
+    icon: "📝"
+  },
+  {
+    name: "Runway",
+    description: "AI 视频编辑和生成平台，创意无限",
+    url: "https://runwayml.com",
+    category: "video",
+    tags: ["视频", "编辑", "创意"],
+    icon: "🎬"
+  },
+  {
+    name: "ElevenLabs",
+    description: "AI 语音合成工具，生成自然流畅的语音",
+    url: "https://elevenlabs.io",
+    category: "audio",
+    tags: ["语音", "音频", "合成"],
+    icon: "🎙️"
+  },
+  {
+    name: "Perplexity",
+    description: "AI 搜索引擎，智能问答和信息检索",
+    url: "https://www.perplexity.ai",
+    category: "utility",
+    tags: ["搜索", "问答", "研究"],
+    icon: "🔍"
+  },
+  {
+    name: "Jasper",
+    description: "AI 营销文案生成工具，提升内容创作效率",
+    url: "https://www.jasper.ai",
+    category: "writing",
+    tags: ["营销", "文案", "创作"],
+    icon: "📢"
   }
+];
+
+const categories = [
+  { id: "all", name: "全部", icon: "🌟" },
+  { id: "chat", name: "对话助手", icon: "💬" },
+  { id: "image", name: "图像生成", icon: "🎨" },
+  { id: "coding", name: "编程助手", icon: "💻" },
+  { id: "writing", name: "写作工具", icon: "✍️" },
+  { id: "video", name: "视频工具", icon: "🎬" },
+  { id: "audio", name: "音频工具", icon: "🎙️" },
+  { id: "utility", name: "实用工具", icon: "🔧" }
 ];
 ---
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>智汇工具 - 实用在线工具集合</title>
-  <link rel="stylesheet" href="/global.css" />
-</head>
-<body>
-  <div class="container">
-    <!-- 顶部导航 -->
-    <header class="topbar">
-      <div class="brand">智汇工具 🛠️</div>
-      <div class="actions">
-        <button id="themeBtn" class="action-btn">
-          <span class="pill">
-            <span>🌓</span>
-            <span>主题</span>
-          </span>
+<BaseLayout 
+  title="Zhi Home - AI 工具导航 | 精选 AI 工具集合"
+  description="发现最优秀的 AI 工具，提升工作效率和创造力"
+>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="brand">Zhi Home</div>
+      <div class="nav-actions">
+        <button class="btn btn-secondary btn-icon" id="themeToggle" aria-label="切换主题">
+          <span id="themeIcon">🌙</span>
         </button>
-        <button class="action-btn">关于</button>
       </div>
-    </header>
+    </div>
+  </nav>
 
-    <!-- 英雄区 -->
-    <section class="hero reveal">
-      <h1>实用在线工具集合</h1>
-      <p>精选各类高效工具，无需安装，打开即用，提升你的工作效率</p>
-    </section>
-
-    <!-- 工具搜索区 -->
-    <section class="section reveal">
-      <div class="section-head">
-        <h2>工具库</h2>
-        <p class="section-meta">共 {tools.length} 个工具</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <img src="/avatar.svg" alt="Avatar" class="hero-avatar" />
+      <h1 class="hero-title">发现最优秀的 AI 工具</h1>
+      <p class="hero-subtitle">精选全球顶尖的人工智能工具，助力您的工作与创作，开启智能新时代</p>
+      <div class="hero-links">
+        <a href="https://github.com" class="social-link" target="_blank" rel="noopener">
+          <span>🔗</span>
+          <span>GitHub</span>
+        </a>
+        <a href="https://twitter.com" class="social-link" target="_blank" rel="noopener">
+          <span>🐦</span>
+          <span>Twitter</span>
+        </a>
+        <a href="mailto:hello@example.com" class="social-link">
+          <span>✉️</span>
+          <span>Email</span>
+        </a>
       </div>
-      
-      <div class="tools-search">
-        <input type="text" placeholder="搜索工具..." id="searchInput" />
-        <select id="categorySelect">
-          <option value="all">全部分类</option>
-          <option value="writing">写作工具</option>
-          <option value="dev">开发工具</option>
-          <option value="image">图片工具</option>
-        </select>
+    </div>
+  </section>
+
+  <!-- Tools Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">AI 工具导航</h2>
+        <p class="section-description">探索 {aiTools.length} 个精选 AI 工具，涵盖对话、图像、编程、写作等多个领域</p>
       </div>
 
-      <!-- 工具卡片网格 -->
-      <div class="tools-grid" id="toolsGrid">
-        {tools.map((tool, index) => (
-          <div class="tool-card reveal" key={tool.name} style={{ transitionDelay: `${index * 50}ms` }}>
-            <div class="icon">{tool.icon}</div>
-            <h3>{tool.name}</h3>
-            <p>{tool.desc}</p>
-            <div class="tags">
-              {tool.tags.map(tag => (
-                <span class="tag" key={tag}>{tag}</span>
-              ))}
-            </div>
-          </div>
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput"
+          placeholder="搜索工具名称、描述或标签..." 
+          aria-label="搜索工具"
+        />
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="filter-tabs">
+        {categories.map(cat => (
+          <button 
+            class={`filter-tab ${cat.id === 'all' ? 'active' : ''}`}
+            data-category={cat.id}
+          >
+            <span>{cat.icon}</span>
+            <span>{cat.name}</span>
+          </button>
         ))}
       </div>
-    </section>
 
-    <!-- 公告区 -->
-    <div class="notice reveal">
-      📢 本站所有工具均为免费使用，数据仅保存在本地，无需担心隐私泄露
+      <!-- Tools Grid -->
+      <div class="tools-grid fade-in" id="toolsGrid">
+        {aiTools.map(tool => (
+          <a 
+            href={tool.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="tool-card"
+            data-category={tool.category}
+            data-tags={tool.tags.join(',')}
+            data-name={tool.name.toLowerCase()}
+            data-description={tool.description.toLowerCase()}
+          >
+            {tool.featured && <span class="tool-badge">精选</span>}
+            <div class="tool-icon">{tool.icon}</div>
+            <h3 class="tool-name">{tool.name}</h3>
+            <p class="tool-description">{tool.description}</p>
+            <div class="tool-tags">
+              {tool.tags.map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
+  </section>
 
-    <!-- 页脚 -->
-    <footer class="footer reveal">
-      <p>© 2026 智汇工具 | 简洁 · 高效 · 免费</p>
-    </footer>
-  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2026 Zhi Home | 精选 AI 工具导航 | 持续更新中</p>
+    </div>
+  </footer>
 
-  <!-- 优化后的交互脚本 -->
   <script>
-    // 主题切换功能（优化动画）
-    const themeBtn = document.getElementById('themeBtn');
-    let isDark = localStorage.getItem('theme') === 'dark';
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
     
-    // 初始化主题
-    if (isDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    // Initialize theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = '☀️';
     }
     
-    // 平滑切换主题
-    themeBtn.addEventListener('click', () => {
-      isDark = !isDark;
-      if (isDark) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-      }
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       
-      // 添加主题切换的过渡动画
+      // Add transition class
       document.body.classList.add('theme-transition');
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      
+      // Remove transition class after animation
       setTimeout(() => {
         document.body.classList.remove('theme-transition');
-      }, 300);
+      }, 350);
     });
 
-    // 滚动动画（优化触发时机和性能）
-    const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+    // Search and Filter Functionality
+    const searchInput = document.getElementById('searchInput');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const toolCards = document.querySelectorAll('.tool-card');
+    
+    let currentCategory = 'all';
+    let searchTerm = '';
+    
+    // Filter function
+    function filterTools() {
+      toolCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const name = card.getAttribute('data-name');
+        const description = card.getAttribute('data-description');
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        
+        const matchesCategory = currentCategory === 'all' || category === currentCategory;
+        const matchesSearch = searchTerm === '' || 
+                             name.includes(searchTerm) || 
+                             description.includes(searchTerm) ||
+                             tags.includes(searchTerm);
+        
+        if (matchesCategory && matchesSearch) {
+          card.style.display = 'block';
+          // Trigger reflow for animation
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 10);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 250);
         }
       });
-    }, {
-      threshold: 0.1, // 更早触发动画
-      rootMargin: '0px 0px -50px 0px' // 调整触发区域
-    });
-    
-    revealElements.forEach(el => {
-      observer.observe(el);
-    });
-
-    // 搜索功能（添加输入防抖和动画）
-    const searchInput = document.getElementById('searchInput');
-    const categorySelect = document.getElementById('categorySelect');
-    const toolsGrid = document.getElementById('toolsGrid');
-    let searchTimeout;
-    
-    // 防抖函数
-    function debounce(func, delay) {
-      return function(...args) {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => func.apply(this, args), delay);
-      };
     }
     
-    // 搜索过滤（带动画）
-    const filterTools = debounce(() => {
-      const searchTerm = searchInput.value.toLowerCase().trim();
-      const category = categorySelect.value;
-      
-      // 先隐藏所有卡片
-      document.querySelectorAll('.tool-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(10px) scale(0.98)';
-      });
-      
-      // 延迟后显示匹配的卡片
-      setTimeout(() => {
-        document.querySelectorAll('.tool-card').forEach((card, index) => {
-          const name = card.querySelector('h3').textContent.toLowerCase();
-          const desc = card.querySelector('p').textContent.toLowerCase();
-          const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.toLowerCase());
-          
-          const matchesSearch = searchTerm === '' || name.includes(searchTerm) || desc.includes(searchTerm) || tags.some(t => t.includes(searchTerm));
-          const matchesCategory = category === 'all' || tags.some(t => {
-            if (category === 'writing') return t === '写作';
-            if (category === 'dev') return t === '开发';
-            if (category === 'image') return t === '图片';
-            return false;
-          });
-          
-          if (matchesSearch && matchesCategory) {
-            card.style.display = 'grid';
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0) scale(1)';
-              card.style.transitionDelay = `${index * 30}ms`;
-            }, 50);
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      }, 200);
-    }, 300);
+    // Search input handler
+    searchInput.addEventListener('input', (e) => {
+      searchTerm = e.target.value.toLowerCase().trim();
+      filterTools();
+    });
     
-    searchInput.addEventListener('input', filterTools);
-    categorySelect.addEventListener('change', filterTools);
-
-    // 页面加载动画
-    window.addEventListener('load', () => {
-      document.body.classList.add('page-loaded');
+    // Category filter handler
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Update active state
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Update current category
+        currentCategory = tab.getAttribute('data-category');
+        filterTools();
+      });
+    });
+    
+    // Prevent default link behavior during filter animations
+    toolCards.forEach(card => {
+      card.style.transition = 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
     });
   </script>
-</body>
-</html>
+</BaseLayout>
