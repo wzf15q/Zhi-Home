@@ -236,13 +236,78 @@ body.theme-transition * {
   animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
+.hero-bio {
+  max-width: 700px;
+  margin: 0 auto 32px;
+  text-align: left;
+  animation: fadeInUp 0.6s ease-out 0.25s both;
+}
+
+.hero-bio p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.hero-bio p:hover {
+  transform: translateX(4px);
+  border-left-color: var(--accent-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  font-size: 18px;
+}
+
+.stat-label {
+  white-space: nowrap;
+}
+
 .hero-links {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
-  animation: fadeInUp 0.6s ease-out 0.3s both;
+  animation: fadeInUp 0.6s ease-out 0.35s both;
 }
 
 .social-link {
@@ -542,6 +607,24 @@ body.theme-transition * {
   .hero-avatar {
     width: 100px;
     height: 100px;
+  }
+
+  .hero-bio {
+    text-align: left;
+  }
+
+  .hero-bio p {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+
+  .hero-stats {
+    gap: 12px;
+  }
+
+  .stat-item {
+    padding: 8px 16px;
+    font-size: 13px;
   }
 
   .section {
